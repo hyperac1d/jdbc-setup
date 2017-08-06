@@ -1,1 +1,1 @@
-# jdbc-setup
+#Java Database API, JFrame (Icon and setFrameCenter, etc..) and API tester.
