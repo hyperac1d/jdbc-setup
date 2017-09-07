@@ -107,3 +107,31 @@ try{
 }catch(Exception e){
    System.out.println("Error: "+e);
 }
+
+
+
+//browse image --
+JFileChooser chooser = new JFileChooser();
+chooser.showOpenDialog(null);
+
+File f = chooser.getSelectedFile();
+String filename = f.getAbsolutePath();
+
+//raw image to bytes
+File fimage = new File(filename);
+try{
+    FileInputStream fis = new FileInputStream(fimage);
+    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+    byte[] buf = new byte[1024];
+    for(int readNum; (readNum=fis.read(buf))!=-1;){
+        bos.write(buf,0,readNum);
+    }
+    imgdata = bos.toByteArray(); 
+    
+    //update JLabel to load image
+    java.awt.Image image = stretchImage(filename,this.lblIMAGE);
+    this.lblIMAGE.setIcon(new javax.swing.ImageIcon(image));
+}
+catch(Exception e){
+    System.out.println("FileInputStream Error: " + e.getMessage());
+}
